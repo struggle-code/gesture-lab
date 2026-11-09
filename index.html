@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>空中手势实验室</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="空中手势实验室首页">
+          <span class="brand-mark"><i></i><i></i><i></i></span>
+          <span>GESTURE<span class="brand-light">LAB</span></span>
+        </a>
+        <div class="topbar-meta">
+          <span class="live-dot"></span>
+          <span id="connectionLabel">等待连接</span>
+          <span class="mono">v1.0 / WEBGL</span>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">01 / INTERACTIVE CANVAS</p>
+          <h1>用手势，<br /><em>掌控</em>空间。</h1>
+          <p class="intro">
+            开启摄像头，让你的手成为画笔、遥控器和光源。所有追踪都在浏览器本地完成。
+          </p>
+          <div class="actions">
+            <button id="cameraButton" class="button button-primary">
+              <span class="button-icon">◎</span>
+              开启摄像头
+            </button>
+            <button id="resetButton" class="button button-ghost">重置画布 <span>↗</span></button>
+          </div>
+          <p class="privacy"><span>▣</span> 你的影像不会离开此设备</p>
+        </div>
+
+        <div class="stage-wrap">
+          <div class="stage-label">
+            <span>LIVE CANVAS</span>
+            <span class="mono" id="fpsLabel">60 FPS</span>
+          </div>
+          <div class="stage" id="stage">
+            <canvas id="particleCanvas"></canvas>
+            <video id="video" playsinline muted></video>
+            <div class="stage-overlay">
+              <div class="crosshair crosshair-tl"></div>
+              <div class="crosshair crosshair-tr"></div>
+              <div class="crosshair crosshair-bl"></div>
+              <div class="crosshair crosshair-br"></div>
+            </div>
+            <div class="stage-message" id="stageMessage">
+              <span class="message-icon">✦</span>
+              <strong>画布已就绪</strong>
+              <small>开启摄像头或移动鼠标开始创作</small>
+            </div>
+            <div class="gesture-pill" id="gesturePill">
+              <span class="gesture-pulse"></span>
+              <span id="gestureLabel">等待手势</span>
+            </div>
+          </div>
+          <div class="stage-footer">
+            <span>MOVE TO PAINT</span>
+            <span class="mono" id="coordinateLabel">X 000 / Y 000</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-grid">
+        <div class="panel how-panel">
+          <div class="panel-heading">
+            <span class="eyebrow">02 / CONTROL MAP</span>
+            <span class="panel-index">GESTURES</span>
+          </div>
+          <div class="gesture-list">
+            <div class="gesture-row">
+              <span class="gesture-symbol">✋</span>
+              <div><strong>张开手掌</strong><small>制造星尘 · 增加能量</small></div>
+              <kbd>OPEN</kbd>
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-symbol">✊</span>
+              <div><strong>握紧拳头</strong><small>吸附粒子 · 清空周围</small></div>
+              <kbd>FIST</kbd>
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-symbol">☝</span>
+              <div><strong>移动食指</strong><small>绘制光迹 · 控制光标</small></div>
+              <kbd>MOVE</kbd>
+            </div>
+          </div>
+        </div>
+        <div class="panel telemetry-panel">
+          <div class="panel-heading">
+            <span class="eyebrow">03 / TELEMETRY</span>
+            <span class="panel-index">LOCAL ONLY</span>
+          </div>
+          <div class="telemetry">
+            <div class="metric"><span>TRACKING</span><strong id="trackingValue">OFFLINE</strong><i class="meter"><b id="trackingMeter"></b></i></div>
+            <div class="metric"><span>PARTICLES</span><strong id="particleValue">000</strong><i class="meter"><b id="particleMeter"></b></i></div>
+            <div class="metric"><span>GESTURE</span><strong id="telemetryGesture">—</strong><i class="metric-line"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer"><span>DESIGNED FOR CURIOUS HANDS</span><span class="mono">© 2025 GESTURE LAB</span></footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
